@@ -2,13 +2,13 @@
 window.addEventListener("load", main);
 
 function main() {
-  var userInput = document.getElementById("intext");
-  var submitButton = document.getElementById("subButton");
-  var encButton = document.getElementById("encButton0");
-  var decButton = document.getElementById("decButton0");
+  let userInput = document.getElementById("intext");
+  let submitButton = document.getElementById("subButton");
+  let encButton = document.getElementById("encButton0");
+  let decButton = document.getElementById("decButton0");
 
   // Encrypt/Decrypt div components
-  var eDMenu = document.getElementById("EDMenu");
+  let eDMenu = document.getElementById("EDMenu");
 
   encButton.addEventListener("click", displayEncForm);
   decButton.addEventListener("click", displayDecForm);

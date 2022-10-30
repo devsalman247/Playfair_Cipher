@@ -2,17 +2,17 @@
 window.addEventListener("load", setupPage);
 
 function setupPage() {
-  var encButton = document.getElementById("encButton");
+  let encButton = document.getElementById("encButton");
   if (encButton != null) {
     encButton.addEventListener("click", encrypt);
   }
 }
 
 function strip(aString) {
-  var splitString = "";
+  let splitString = "";
 
-  for (var item in aString) {
-    var letter = aString.charAt(item);
+  for (let item in aString) {
+    let letter = aString.charAt(item);
 
     // ignore whitespace and append to string
     if (letter.search(/\s|\W|\d/gim) == -1) {
@@ -23,11 +23,11 @@ function strip(aString) {
 }
 
 function fillMatrix() {
-  var userInput = window.sessionStorage.getItem("kw");
-  var matrix = new Array(25);
-  var matrixIndex = 0;
-  var keyIndex = 0;
-  var alphabet = "abcdefghijklmnopqrstuvwxyz";
+  let userInput = window.sessionStorage.getItem("kw");
+  let matrix = new Array(25);
+  let matrixIndex = 0;
+  let keyIndex = 0;
+  let alphabet = "abcdefghijklmnopqrstuvwxyz";
 
   // strip whitespace
   userInput = strip(userInput);
@@ -35,7 +35,7 @@ function fillMatrix() {
 
   // Fill in the keyword
   while (keyIndex < userInput.length) {
-    var letter = userInput.charAt(keyIndex);
+    let letter = userInput.charAt(keyIndex);
     if (matrix.indexOf(letter) == -1) {
       matrix[matrixIndex] = letter;
       matrixIndex++;
@@ -43,11 +43,11 @@ function fillMatrix() {
     keyIndex++;
   }
   // Insert unique letters from the alphabet
-  for (var item in alphabet) {
-    var literal = alphabet.charAt(item);
+  for (let item in alphabet) {
+    let literal = alphabet.charAt(item);
 
     //check both uppercase and lowercase letters
-    var letterNotInMatrix =
+    let letterNotInMatrix =
       matrix.indexOf(literal) + matrix.indexOf(literal.toUpperCase()) == -2;
 
     // if the letter is not in the matrix (-1 + -1)
@@ -78,13 +78,13 @@ function fillMatrix() {
 }
 
 function getDigrams(aString) {
-  var count = 0;
-  var input = aString.toLowerCase();
-  var tempDigram = "";
-  var textLength = input.length;
-  var digramLength;
-  var letter;
-  var array = [];
+  let count = 0;
+  let input = aString.toLowerCase();
+  let tempDigram = "";
+  let textLength = input.length;
+  let digramLength;
+  let letter;
+  let array = [];
 
   while (count < input.length) {
     digramLength = tempDigram.length;
@@ -93,7 +93,7 @@ function getDigrams(aString) {
     if (digramLength == 0) {
       tempDigram += letter;
     } else if (digramLength == 1) {
-      var str = tempDigram.charAt(0);
+      let str = tempDigram.charAt(0);
       if (str == letter) {
         tempDigram += "x";
         count--; // stay at the current char
@@ -129,28 +129,28 @@ function getDigrams(aString) {
 }
 
 function encrypt() {
-  var matrix = fillMatrix();
-  var plainT = strip(document.getElementById("textP").value);
-  var digrams = getDigrams(plainT);
-  var encryptedArray = [];
-  var tempString = "";
-  var letter1;
-  var letter2;
-  var letterPosition1;
-  var letterPosition2;
-  var distance;
-  var difference;
-  var mod4Result;
-  var mod5Result;
-  var mod6Result;
-  var offset;
-  var min;
-  var max;
+  let matrix = fillMatrix();
+  let plainT = strip(document.getElementById("textP").value);
+  let digrams = getDigrams(plainT);
+  let encryptedArray = [];
+  let tempString = "";
+  let letter1;
+  let letter2;
+  let letterPosition1;
+  let letterPosition2;
+  let distance;
+  let difference;
+  let mod4Result;
+  let mod5Result;
+  let mod6Result;
+  let offset;
+  let min;
+  let max;
 
   if (plainT == "") {
     alert("Please input a text to be encrypted.");
   } else {
-    for (var i = 0; i < digrams.length; i++) {
+    for (let i = 0; i < digrams.length; i++) {
       letter1 = digrams[i][0];
       letter2 = digrams[i][1];
 
@@ -165,8 +165,8 @@ function encrypt() {
       letterPosition2 = matrix.indexOf(letter2);
       min = Math.min(letterPosition1, letterPosition2);
       max = Math.max(letterPosition1, letterPosition2);
-      var minDistanceFromEdge = min % 5;
-      var maxDistanceFromEdge = max % 5;
+      let minDistanceFromEdge = min % 5;
+      let maxDistanceFromEdge = max % 5;
       difference = Math.abs(letterPosition1 - letterPosition2);
       mod4Result = difference % 4;
       mod5Result = difference % 5;
@@ -215,8 +215,8 @@ function encrypt() {
 
       // diagonal part
       else {
-        var counter = min;
-        var rowD = 0;
+        let counter = min;
+        let rowD = 0;
 
         // if at the edge of matrix
         if ((min + 1) % 5 == 0 || minDistanceFromEdge > maxDistanceFromEdge) {

@@ -6,28 +6,28 @@ function loadPage() {
 }
 
 function decrypt() {
-  var matrix = fillMatrix();
-  var ciphT = strip(document.getElementById("textC").value);
-  var digrams = getDigrams(ciphT);
-  var decryptedArray = [];
-  var tempString = "";
-  var letter1;
-  var letter2;
-  var letterPosition1;
-  var letterPosition2;
-  var distance;
-  var difference;
-  var mod4Result;
-  var mod5Result;
-  var mod6Result;
-  var offset;
-  var min;
-  var max;
+  let matrix = fillMatrix();
+  let ciphT = strip(document.getElementById("textC").value);
+  let digrams = getDigrams(ciphT);
+  let decryptedArray = [];
+  let tempString = "";
+  let letter1;
+  let letter2;
+  let letterPosition1;
+  let letterPosition2;
+  let distance;
+  let difference;
+  let mod4Result;
+  let mod5Result;
+  let mod6Result;
+  let offset;
+  let min;
+  let max;
 
   if (ciphT == "") {
     alert("Please input a text to be decrypted.");
   } else {
-    for (var i = 0; i < digrams.length; i++) {
+    for (let i = 0; i < digrams.length; i++) {
       letter1 = digrams[i][0];
       letter2 = digrams[i][1];
 
@@ -35,8 +35,8 @@ function decrypt() {
       letterPosition2 = matrix.indexOf(letter2);
       min = Math.min(letterPosition1, letterPosition2);
       max = Math.max(letterPosition1, letterPosition2);
-      var minDistanceFromEdge = min % 5;
-      var maxDistanceFromEdge = max % 5;
+      let minDistanceFromEdge = min % 5;
+      let maxDistanceFromEdge = max % 5;
       difference = Math.abs(letterPosition1 - letterPosition2);
       mod4Result = difference % 4;
       mod5Result = difference % 5;
@@ -91,8 +91,8 @@ function decrypt() {
 
       // diagonal part
       else {
-        var counter = min;
-        var rowD = 0;
+        let counter = min;
+        let rowD = 0;
 
         // if at the edge of matrix
         if ((min + 1) % 5 == 0 || minDistanceFromEdge > maxDistanceFromEdge) {
